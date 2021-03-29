@@ -6,6 +6,7 @@ fetch('http://puzzle.mead.io/puzzle').then( (response) => {
      })
 })
 */
+
 const weatherform = document.querySelector('form')
 const search = document.querySelector('input')
 const messageOne = document.querySelector('#message-1')
@@ -17,7 +18,6 @@ weatherform.addEventListener('submit', (e) => {
     
     messageOne.textContent = 'Loading...'
     messageTwo.textContent = ''
-
     fetch('/weather?address='+location).then( (response) => {
         response.json().then( (data) => {
             if(data.error){
@@ -25,7 +25,8 @@ weatherform.addEventListener('submit', (e) => {
             }
             else{
                 messageOne.textContent = data.location
-                messageTwo.textContent = data.forecast
+                messageTwo.textContent = data.forecast.description
+                document.getElementById('message-3').innerHTML = "<img src = '" + data.forecast.icon + "'alt = 'infinix'>"
             }
         })
     })
